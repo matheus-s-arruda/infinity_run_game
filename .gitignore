@@ -1,0 +1,16 @@
+
+# Godot-specific ignores
+.import/
+.import
+export.cfg
+export_presets.cfg
+
+# Mono-specific ignores
+.mono/
+
+android/
+keystores/
+admob-lib/
+som/
+sprintes/
+builds/
