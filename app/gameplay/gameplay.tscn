@@ -1,0 +1,399 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://app/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://app/gameplay/obstaculos.gd" type="Script" id=2]
+[ext_resource path="res://app/gameplay/cenario.tscn" type="PackedScene" id=3]
+[ext_resource path="res://app/gameplay/gameplay.gd" type="Script" id=4]
+[ext_resource path="res://app/gameplay/lazer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://som/die.wav" type="AudioStream" id=6]
+[ext_resource path="res://default_theme.tres" type="Theme" id=7]
+[ext_resource path="res://sprintes/GUI/botao_modelo.png" type="Texture" id=8]
+[ext_resource path="res://sprintes/GUI/ads_icone.png" type="Texture" id=9]
+[ext_resource path="res://app/gameplay/vida.gd" type="Script" id=10]
+[ext_resource path="res://admob-lib/admob.gd" type="Script" id=11]
+[ext_resource path="res://app/gameplay/GUI.gd" type="Script" id=12]
+[ext_resource path="res://sprintes/GUI/pause.png" type="Texture" id=13]
+[ext_resource path="res://sprintes/GUI/play.png" type="Texture" id=14]
+[ext_resource path="res://som/vida.wav" type="AudioStream" id=15]
+[ext_resource path="res://som/laser.wav" type="AudioStream" id=16]
+[ext_resource path="res://som/infinite_run_soundtrack_2.wav" type="AudioStream" id=17]
+[ext_resource path="res://sprintes/GUI/audio_disable.png" type="Texture" id=18]
+[ext_resource path="res://sprintes/GUI/audio_anable.png" type="Texture" id=19]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends AudioStreamPlayer
+
+
+
+func _process(delta):
+	if Globals.can_audio_fx_play and not is_playing() :
+		play()
+	else:
+		stop()
+	
+	volume_db = -get_parent().get_parent().distance_player_laser
+"
+
+[node name="gameplay" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="cenario" parent="." instance=ExtResource( 3 )]
+
+[node name="obstaculos" type="Node2D" parent="."]
+position = Vector2( 544, 248 )
+script = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="obstaculos"]
+
+[node name="Timer_npc" type="Timer" parent="obstaculos"]
+
+[node name="player_spaw" type="Node2D" parent="."]
+position = Vector2( 128, 248 )
+
+[node name="player" parent="player_spaw" instance=ExtResource( 1 )]
+
+[node name="player_resquicio" type="Node2D" parent="."]
+position = Vector2( 128, 248 )
+
+[node name="die_audio" type="AudioStreamPlayer" parent="player_resquicio"]
+stream = ExtResource( 6 )
+
+[node name="vida_audio" type="AudioStreamPlayer" parent="player_resquicio"]
+stream = ExtResource( 15 )
+
+[node name="lazer_audio" type="AudioStreamPlayer" parent="player_resquicio"]
+stream = ExtResource( 16 )
+volume_db = -55.008
+script = SubResource( 1 )
+
+[node name="lazer" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, -38 )
+
+[node name="GUI" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 512.0
+margin_bottom = 288.0
+theme = ExtResource( 7 )
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="touch_screen" type="Button" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_mode = 0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="top" type="Control" parent="GUI"]
+anchor_left = 0.5
+anchor_right = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="distancia" type="Label" parent="GUI/top"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -65.0
+margin_top = 8.0
+margin_right = 65.0
+margin_bottom = 24.0
+theme = ExtResource( 7 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="record" type="Label" parent="GUI/top"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -24.0
+margin_top = 24.0
+margin_right = 43.0
+margin_bottom = 36.0
+rect_scale = Vector2( 0.66, 0.66 )
+text = "record!"
+align = 1
+valign = 1
+
+[node name="botton" type="Control" parent="GUI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_top = -102.0
+margin_bottom = -102.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="return" type="TextureButton" parent="GUI/botton"]
+margin_left = -196.0
+margin_top = -20.0
+margin_right = -136.0
+rect_scale = Vector2( 1.8, 1.8 )
+texture_normal = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GUI/botton/return"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "return"
+align = 1
+valign = 1
+
+[node name="ads" type="TextureButton" parent="GUI/botton"]
+margin_left = -54.0
+margin_top = -20.0
+margin_right = 36.0
+margin_bottom = 10.0
+rect_scale = Vector2( 1.25, 1.25 )
+texture_normal = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GUI/botton/ads"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -67.665
+margin_top = -5.0
+margin_right = -3.665
+margin_bottom = 5.0
+text = "continue"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="GUI/botton/ads"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 11.112
+margin_right = 11.112
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="GUI/botton/ads/Control"]
+texture = ExtResource( 9 )
+
+[node name="restart" type="TextureButton" parent="GUI/botton"]
+margin_left = 92.0
+margin_top = -20.0
+margin_right = 152.0
+rect_scale = Vector2( 1.8, 1.8 )
+texture_normal = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GUI/botton/restart"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "restart"
+align = 1
+valign = 1
+
+[node name="load_ads" type="Label" parent="GUI/botton"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -60.0
+margin_top = -12.0
+margin_bottom = -2.0
+rect_scale = Vector2( 2, 2 )
+text = "wait..."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vida" type="Control" parent="GUI"]
+anchor_left = 0.5
+anchor_right = 0.5
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pause" type="TextureButton" parent="GUI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -64.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 13 )
+expand = true
+stretch_mode = 3
+
+[node name="paused" type="Control" parent="GUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="play" type="TextureButton" parent="GUI/paused"]
+pause_mode = 2
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 14 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quit" type="TextureButton" parent="GUI/paused"]
+pause_mode = 2
+margin_left = -216.0
+margin_top = -116.0
+margin_right = -168.0
+margin_bottom = -100.0
+rect_scale = Vector2( 1.5, 1.5 )
+texture_normal = ExtResource( 8 )
+expand = true
+
+[node name="Label" type="Label" parent="GUI/paused/quit"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "quit"
+align = 1
+valign = 1
+
+[node name="can_music_btn" type="Button" parent="GUI/paused"]
+pause_mode = 2
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 108.0
+margin_top = -124.0
+margin_right = 148.0
+margin_bottom = -100.0
+focus_mode = 0
+toggle_mode = true
+flat = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="GUI/paused/can_music_btn"]
+margin_right = 24.0
+margin_bottom = 24.0
+text = "mc"
+align = 1
+valign = 1
+
+[node name="icon" type="TextureRect" parent="GUI/paused/can_music_btn"]
+margin_left = 16.0
+margin_right = 40.0
+margin_bottom = 24.0
+mouse_filter = 2
+texture = ExtResource( 19 )
+stretch_mode = 4
+
+[node name="icon2" type="TextureRect" parent="GUI/paused/can_music_btn"]
+margin_left = 16.0
+margin_right = 40.0
+margin_bottom = 24.0
+mouse_filter = 2
+texture = ExtResource( 18 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="can_fx_btn" type="Button" parent="GUI/paused"]
+pause_mode = 2
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 164.0
+margin_top = -124.0
+margin_right = 204.0
+margin_bottom = -100.0
+focus_mode = 0
+toggle_mode = true
+flat = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="GUI/paused/can_fx_btn"]
+margin_right = 24.0
+margin_bottom = 24.0
+text = "fx"
+align = 1
+valign = 1
+
+[node name="icon" type="TextureRect" parent="GUI/paused/can_fx_btn"]
+margin_left = 16.0
+margin_right = 40.0
+margin_bottom = 24.0
+mouse_filter = 2
+texture = ExtResource( 19 )
+stretch_mode = 4
+
+[node name="icon2" type="TextureRect" parent="GUI/paused/can_fx_btn"]
+margin_left = 16.0
+margin_right = 40.0
+margin_bottom = 24.0
+mouse_filter = 2
+texture = ExtResource( 18 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fade" type="ColorRect" parent="GUI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AdMob" type="Node" parent="."]
+script = ExtResource( 11 )
+is_real = true
+rewarded_id = "ca-app-pub-7055447770076743/9881774270"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 17 )
+volume_db = -6.0
+
+[connection signal="timeout" from="obstaculos/Timer" to="obstaculos" method="_on_Timer_timeout"]
+[connection signal="timeout" from="obstaculos/Timer_npc" to="obstaculos" method="_on_Timer_npc_timeout"]
+[connection signal="pressed" from="GUI/botton/return" to="GUI" method="_on_return_pressed"]
+[connection signal="pressed" from="GUI/botton/ads" to="GUI" method="_on_ads_pressed"]
+[connection signal="pressed" from="GUI/botton/restart" to="GUI" method="_on_restart_pressed"]
+[connection signal="pressed" from="GUI/pause" to="GUI" method="_on_pause_pressed"]
+[connection signal="pressed" from="GUI/paused/play" to="GUI" method="_on_play_pressed"]
+[connection signal="pressed" from="GUI/paused/quit" to="GUI" method="_on_quit_pressed"]
+[connection signal="pressed" from="GUI/paused/can_music_btn" to="GUI" method="_on_can_music_btn_pressed"]
+[connection signal="pressed" from="GUI/paused/can_fx_btn" to="GUI" method="_on_can_fx_btn_pressed"]
+[connection signal="rewarded" from="AdMob" to="." method="_on_AdMob_rewarded"]
+[connection signal="rewarded_video_failed_to_load" from="AdMob" to="." method="_on_AdMob_rewarded_video_failed_to_load"]
+[connection signal="rewarded_video_loaded" from="AdMob" to="." method="_on_AdMob_rewarded_video_loaded"]

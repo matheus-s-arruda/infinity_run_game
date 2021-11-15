@@ -1,0 +1,12 @@
+/// INFINITE RUNNER ORBITAL CANNON LASER
+
+infinite_runner_orbital_laser_cannon_escape
+
+###########################
+efeitos sonoros
+trilha sonora
+
+mais npcs
+
+talvez power ups (saltos maiores, planar no ar...)
+

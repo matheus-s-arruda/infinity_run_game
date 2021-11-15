@@ -1,0 +1,382 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://sprintes/GUI/botao_modelo_w.png" type="Texture" id=2]
+[ext_resource path="res://app/menu_background.gd" type="Script" id=3]
+[ext_resource path="res://sprintes/GUI/telas_2_background_menu.png" type="Texture" id=4]
+[ext_resource path="res://sprintes/GUI/luz_background_menu.png" type="Texture" id=5]
+[ext_resource path="res://sprintes/GUI/telas_background_menu.png" type="Texture" id=6]
+[ext_resource path="res://sprintes/GUI/background_menu.png" type="Texture" id=7]
+[ext_resource path="res://app/main.gd" type="Script" id=8]
+[ext_resource path="res://sprintes/player/menu/sprite_0.png" type="Texture" id=9]
+[ext_resource path="res://sprintes/player/menu/virado0.png" type="Texture" id=10]
+[ext_resource path="res://sprintes/player/menu/sprite_1.png" type="Texture" id=11]
+[ext_resource path="res://sprintes/player/menu/virado1.png" type="Texture" id=12]
+[ext_resource path="res://sprintes/player/menu/sprite_2.png" type="Texture" id=13]
+[ext_resource path="res://sprintes/player/menu/virado2.png" type="Texture" id=14]
+[ext_resource path="res://sprintes/player/menu/menu_clicando.png" type="Texture" id=15]
+[ext_resource path="res://som/infinite_run_soundtrack.wav" type="AudioStream" id=16]
+[ext_resource path="res://som/click.wav" type="AudioStream" id=17]
+[ext_resource path="res://sprintes/GUI/audio_anable.png" type="Texture" id=18]
+[ext_resource path="res://sprintes/GUI/audio_disable.png" type="Texture" id=19]
+[ext_resource path="res://sprintes/GUI/tutorial.png" type="Texture" id=20]
+[ext_resource path="res://sprintes/GUI/botao_modelo_2.png" type="Texture" id=21]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 9 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "normal",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "click",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[node name="main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="TextureRect" parent="background"]
+margin_left = -256.0
+margin_top = -144.0
+margin_right = 256.0
+margin_bottom = 144.0
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="personagem" type="AnimatedSprite" parent="background"]
+position = Vector2( 20, -21 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 1 )
+animation = "normal"
+frame = 9
+playing = true
+
+[node name="luz" type="TextureRect" parent="background"]
+margin_left = -256.0
+margin_top = -144.0
+margin_right = 256.0
+margin_bottom = 144.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="telas" type="AnimatedSprite" parent="background"]
+position = Vector2( -1.34706e-05, -48 )
+scale = Vector2( 1.28, 1.28 )
+frames = SubResource( 2 )
+frame = 1
+playing = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="background"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -112.0
+margin_top = -128.0
+margin_right = 112.0
+margin_bottom = -104.0
+bbcode_enabled = true
+bbcode_text = "[center][color=red]0[/color]rbital [color=red]L[/color]aser [color=red]C[/color]annon [color=red]E[/color]scape"
+meta_underlined = false
+text = "0rbital Laser Cannon Escape"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tutorial_btn" type="TextureButton" parent="."]
+margin_left = 8.0
+margin_top = 56.0
+margin_right = 56.0
+margin_bottom = 136.0
+focus_mode = 0
+texture_normal = ExtResource( 21 )
+expand = true
+
+[node name="Label" type="Label" parent="tutorial_btn"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "how 
+to 
+play"
+align = 1
+valign = 1
+
+[node name="start" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -208.0
+margin_top = 56.0
+margin_right = -108.0
+margin_bottom = 86.0
+texture_normal = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="start"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -10.0
+rect_scale = Vector2( 2, 2 )
+text = "run"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quit" type="TextureButton" parent="."]
+margin_left = 368.0
+margin_top = 200.0
+margin_right = 468.0
+margin_bottom = 230.0
+texture_normal = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="quit"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -10.0
+rect_scale = Vector2( 2, 2 )
+text = "quit"
+align = 1
+valign = 1
+
+[node name="score" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_top = 56.0
+margin_bottom = 56.0
+rect_scale = Vector2( 1.4, 1.4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="score"]
+margin_left = -64.0
+margin_top = -28.0
+margin_right = 64.0
+margin_bottom = 36.0
+align = 1
+valign = 1
+
+[node name="can_music_play" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -96.0
+margin_top = 8.0
+margin_right = -56.0
+margin_bottom = 32.0
+focus_mode = 0
+toggle_mode = true
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="can_music_play"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -12.0
+margin_right = 4.0
+margin_bottom = 12.0
+text = "ms"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon" type="TextureRect" parent="can_music_play"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4.0
+margin_top = -12.0
+margin_right = 20.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 20, 20 )
+mouse_filter = 2
+texture = ExtResource( 18 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon2" type="TextureRect" parent="can_music_play"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4.0
+margin_top = -12.0
+margin_right = 20.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 20, 20 )
+mouse_filter = 2
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="can_fx_play" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -48.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = 32.0
+focus_mode = 0
+toggle_mode = true
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="can_fx_play"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -12.0
+margin_right = 4.0
+margin_bottom = 12.0
+text = "fx"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon" type="TextureRect" parent="can_fx_play"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4.0
+margin_top = -12.0
+margin_right = 20.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 20, 20 )
+mouse_filter = 2
+texture = ExtResource( 18 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon2" type="TextureRect" parent="can_fx_play"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4.0
+margin_top = -12.0
+margin_right = 20.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 20, 20 )
+mouse_filter = 2
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fade" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 16.0
+margin_bottom = 16.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+
+[node name="click_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+
+[node name="tutorial" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -512.0
+margin_right = -512.0
+texture = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="tutorial"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_mode = 0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="tutorial_btn" to="." method="_on_tutorial_btn_pressed"]
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="can_music_play" to="." method="_on_can_music_play_pressed"]
+[connection signal="pressed" from="can_fx_play" to="." method="_on_can_fx_play_pressed"]
+[connection signal="pressed" from="tutorial/Button" to="." method="_on_Button_pressed"]

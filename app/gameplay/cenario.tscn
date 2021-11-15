@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://sprintes/parallax/background.png" type="Texture" id=1]
+[ext_resource path="res://sprintes/parallax/layer_0.png" type="Texture" id=2]
+[ext_resource path="res://sprintes/parallax/layer_11.png" type="Texture" id=3]
+[ext_resource path="res://sprintes/parallax/layer_1.png" type="Texture" id=4]
+[ext_resource path="res://app/gameplay/cenario.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 256, 6 )
+
+[node name="cenario" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="chao" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chao"]
+position = Vector2( 256, 254 )
+shape = SubResource( 1 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="background" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 512, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/background"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="layer_2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 512, 0 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/layer_2"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="layer_1" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 512, 0 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/layer_1"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="ParallaxForeground" type="ParallaxBackground" parent="."]
+layer = 100
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxForeground"]
+motion_mirroring = Vector2( 512, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxForeground/ParallaxLayer"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+centered = false
