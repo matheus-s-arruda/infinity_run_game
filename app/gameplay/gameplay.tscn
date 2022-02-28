@@ -374,11 +374,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AdMob" type="Node" parent="."]
-script = ExtResource( 11 )
-is_real = true
-rewarded_id = "ca-app-pub-7055447770076743/9881774270"
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 17 )
